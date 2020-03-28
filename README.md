@@ -8,3 +8,8 @@
 * Vamshi Krishna Yellamanchili
 * Millindar Reddy Maligireddy
 * Nandini Doppalapudi
+* Sai Kiran Reddy Baki
+* Rishika Reddy Gaddam
+* Lavanya Reddy Uppula
+* Chitralekha Chikku
+* Vamshi Krishna Reddy Y
