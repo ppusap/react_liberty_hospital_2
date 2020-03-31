@@ -25,3 +25,12 @@ const Header = () => {
     localStorage.clear();
     history.push("/login");
   };
+
+  return (
+    <div>
+      <Navbar dark expand="md">
+        <NavbarBrand href="/">
+          <img
+            src="https://libertyhospitalfoundation.org/wp-content/uploads/2018/04/FinalAsset-1.png"
+            alt=""
+          />
