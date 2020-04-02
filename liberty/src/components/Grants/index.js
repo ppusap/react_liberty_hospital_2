@@ -24,4 +24,73 @@ export default function Grant({ match }) {
     primary: "",
     tax_id: "",
     contact: "",
+    person_title: "Mr",
+    address: "",
+    phone: "",
+    fax: "",
+    email: "",
+    annual: false,
+    roster: false,
+    audit: false,
+    proof: false,
+    income: false,
+    letters: false,
+    info: "",
+    docs: "",
+    title: "",
+    new_or_current: false,
+    funding_past: "",
+    synopsis: "",
+    priority: "",
+    main_outcomes: "",
+    outcomes: "",
+    collaborative: "",
+    sources: "",
+    sustainability: "",
+    describe: "",
+    no_of_people: 0,
+    socio: "",
+    age: "",
+    gender: "",
+    clients: "",
+    budget: "",
+    isAdditional: "",
+    additional: "",
+    head: "",
+    head_title: "",
+    date: new Date(),
+    signature: "",
+    director: "",
+    funding: 0,
+    implementation: "",
+    rfp: "",
+    zip: "",
+    equity: "",
+    population: "",
+    annual_file: "",
+    roster_file: "",
+    audit_file: "",
+    proof_file: "",
+    letters_file: "",
+    budget_file: "",
+    additional_file: "",
+    score: "",
+    comments: "",
+    isEmployee: false,
+    user_id: userDetails.id
 });
+const [loading, setLoading] = useState(false);
+const [disabled, setDisabled] = useState(false);
+const [actions, setActions] = useState(true);
+const [type, setType] = useState("user");
+const [user, setUser] = useState({});
+const [fileOptions] = useState(options);
+const [defaultOption, changeOption] = useState(options[0]);
+const fileRef = useRef();
+const [submitting, setSubmitting] = useState(false);
+const [allActionsDisable, setAllActionsDisable] = useState(false);
+const budgetRef = useRef();
+
+const isObjectEmpty = obj => {
+  return Object.keys(obj).length === 0;
+};
