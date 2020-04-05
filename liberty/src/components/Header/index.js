@@ -57,4 +57,16 @@ const Header = () => {
                   <Link to="/scholarship/status">Check Status</Link>
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>  
+            </UncontrolledDropdown>
+            <NavbarText>
+              <Link to="/programs">Program Management</Link>
+            </NavbarText>
+            <NavbarText onClick={logout}>Logout</NavbarText>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
+  );
+};
+
+export default Header;  
