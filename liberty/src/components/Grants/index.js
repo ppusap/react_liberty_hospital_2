@@ -564,3 +564,33 @@ export default function Grant({ match }) {
                               }}
                             />
                           )}
+                            </div>
+                      </div>
+                    )}
+                    <div>{getFiles(values, setFieldValue)}</div>
+                    <div className="row files-dropdown">
+                      <Dropdown
+                        options={options}
+                        onChange={optionChange}
+                        value={defaultOption}
+                        placeholder="Select an option"
+                        className="col-sm-8"
+                      />
+                      <div className="col-sm-4">
+                        <button className="file-btn" onClick={openFileSelector}>
+                          Select Files
+                        </button>
+                        <input
+                          ref={fileRef}
+                          className="DNI"
+                          type="file"
+                          accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                          name="file_upload"
+                          onChange={e => {
+                            setFieldValue(
+                              `${defaultOption.value}_file`,
+                              e.currentTarget.files[0]
+                            );
+                            setFieldValue(defaultOption.value, true);
+                          }}
+                        />
