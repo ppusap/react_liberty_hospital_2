@@ -527,3 +527,40 @@ export default function Grant({ match }) {
                               id="income"
                               checked={values.income}
                             />
+                             Last fiscal year income statement detailing sources
+                            and use of funds
+                          </label>
+                        </div>
+                        <div className="chk-container disable-chk">
+                          <label htmlFor="letters">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="letters"
+                              checked={values.letters}
+                            />
+                            Letters of Support/ Memorandums of Agreement from
+                            collaborating agencies/ partners
+                          </label>
+                          {values.letters_file && grant_id ? (
+                            <a
+                              className="view-file"
+                              target="blank"
+                              href={`http://localhost:4000/${values.letters_file}`}
+                            >
+                              View File
+                            </a>
+                          ) : (
+                            <input
+                              type="file"
+                              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                              name="letters_file"
+                              onChange={e => {
+                                setFieldValue(
+                                  "letters_file",
+                                  e.currentTarget.files[0]
+                                );
+                                setFieldValue("letters", true);
+                              }}
+                            />
+                          )}
