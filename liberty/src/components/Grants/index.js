@@ -502,3 +502,28 @@ export default function Grant({ match }) {
                                   target="blank"
                                   href={`http://localhost:4000/${values.proof_file}`}
                                 >
+                                    View File
+                            </a>
+                          ) : (
+                            <input
+                              type="file"
+                              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                              name="proof_file"
+                              onChange={e => {
+                                setFieldValue(
+                                  "proof_file",
+                                  e.currentTarget.files[0]
+                                );
+                                setFieldValue("proof", true);
+                              }}
+                            />
+                          )}
+                        </div>
+                        <div className="chk-container disable-chk DNI">
+                          <label htmlFor="income">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="income"
+                              checked={values.income}
+                            />
