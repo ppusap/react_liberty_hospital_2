@@ -94,3 +94,756 @@ const budgetRef = useRef();
 const isObjectEmpty = obj => {
   return Object.keys(obj).length === 0;
 };
+return (
+  <div className="grants">
+    <Helmet>
+      <title>Liberty Hospital Foundation - Grant Application</title>
+    </Helmet>
+    <Header />
+    {!success ? (
+      <div className="main-container">
+        <h3 className="title">LiveWell Grant Application Form</h3>
+        {loading ? (
+          <h3>Loading...</h3>
+        ) : (
+          <Formik
+            initialValues={initial}
+            validationSchema={GrantSchema}
+            validateOnBlur={false}
+            validateOnChange={false}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              validateForm,
+              setFieldValue
+            }) => (
+              <form
+                onSubmit={e => e.preventDefault()}
+                className={disabled ? "disabled" : ""}
+              >
+                <div className="input-container row">
+                  <label className="col-sm-8"></label>
+                  <label className="col-sm-1 required">DATE:</label>
+                  <DatePicker
+                    selected={values.date}
+                    dateFormat="MMMM d, yyyy"
+                    name="date"
+                    onChange={date => setFieldValue("date", date)}
+                  />
+                </div>
+                <h5 className="sub-title">Agency Information:</h5>
+                <div className="agency-info">
+                  <div className="input-container row ">
+                    <label className="col-sm-4 required">
+                      Name of Agency:
+                    </label>
+                    <input
+                      className="col-sm-8"
+                      type="text"
+                      name="agency"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.agency}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-4 required">
+                      Primary Agency Tax ID:
+                    </label>
+                    <input
+                      className="col-sm-8"
+                      type="text"
+                      name="tax_id"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.tax_id}
+                    />
+                  </div>
+                  <div className="flex-container row DNI">
+                    <div className="input-container col-sm-6 row ">
+                      <label className="col-sm-4 required">
+                        Primary Agency:
+                      </label>
+                      <input
+                        className="col-sm-8"
+                        type="text"
+                        name="primary"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.primary}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-container row">
+                    <div className="input-container col-sm-6 row">
+                      <label className="col-sm-4 required">
+                        Contact Person:
+                      </label>
+                      <input
+                        className="col-sm-8"
+                        type="text"
+                        name="contact"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.contact}
+                      />
+                    </div>
+                    <div className="input-container col-sm-6 row">
+                      <label className="col-sm-4 required">Title:</label>
+                      {/* <input
+                      className="col-sm-8"
+                      type="text"
+                      name="person_title"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.person_title}
+                    /> */}
+                      <Input
+                        type="select"
+                        id="exampleSelect"
+                        name="person_title"
+                        className="col-sm-8"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.person_title}
+                      >
+                        <option>Mr</option>
+                        <option>Mrs</option>
+                        <option>Ms</option>
+                        <option>Others</option>
+                      </Input>
+                    </div>
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-3 required">
+                      Mailing Address:
+                    </label>
+                    <input
+                      className="col-sm-9"
+                      type="text"
+                      name="address"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.address}
+                    />
+                  </div>
+                  <div className="flex-container row">
+                    <div className="input-container col-sm-4 row">
+                      <label className="col-sm-4 required">Phone:</label>
+                      <input
+                        className="col-sm-8"
+                        type="number"
+                        name="phone"
+                        onChange={e =>
+                          numberChange(e, setFieldValue, "phone")
+                        }
+                        onBlur={handleBlur}
+                        value={values.phone}
+                      />
+                      <span className="validation-error ML34">
+                        {errors.phone || touched.phone}
+                      </span>
+                    </div>
+                    <div className="input-container col-sm-4 row">
+                      <label className="col-sm-4 required">Fax:</label>
+                      <input
+                        className="col-sm-8"
+                        type="text"
+                        name="fax"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.fax}
+                      />
+                    </div>
+                    <div className="input-container col-sm-4 row ML34">
+                      <label className="col-sm-4 required">E-Mail:</label>
+                      <input
+                        className="col-sm-8"
+                        type="text"
+                        name="email"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.email}
+                      />
+                      <span className="validation-error">
+                        {errors.email || touched.email}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-4 required">
+                      Briefly summarize the mission of your agency:
+                    </label>
+                    <input
+                      className="col-sm-8"
+                      type="text"
+                      name="info"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.info}
+                    />
+                  </div>
+                </div>
+                <div className="copies-container separate-container">
+                  <div className="p-text">
+                    Please attach copies of the following documents with your
+                    grant application for each of the requesting agencies:
+                  </div>
+                  {true ? null : (
+                    <div className="check-container">
+                      <div className="chk-container disable-chk">
+                        <label htmlFor="annual">
+                          <Field
+                            type="checkbox"
+                            value="true"
+                            id="annual"
+                            checked={values.annual}
+                          />
+                          Latest annual report
+                        </label>
+                        {values.annual_file && grant_id ? (
+                          <a
+                            className="view-file"
+                            target="blank"
+                            href={`http://localhost:4000/${values.annual_file}`}
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          <input
+                            type="file"
+                            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                            name="annual_file"
+                            onChange={e => {
+                              setFieldValue(
+                                "annual_file",
+                                e.currentTarget.files[0]
+                              );
+                              setFieldValue("annual", true);
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div className="chk-container disable-chk">
+                        <label htmlFor="roster">
+                          <Field
+                            type="checkbox"
+                            value="true"
+                            id="roster"
+                            checked={values.roster}
+                          />
+                          Current roster of Board of Directors and staff
+                        </label>
+                        {values.roster_file && grant_id ? (
+                          <a
+                            className="view-file"
+                            target="blank"
+                            href={`http://localhost:4000/${values.roster_file}`}
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          <input
+                            type="file"
+                            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                            name="roster_file"
+                            onChange={e => {
+                              setFieldValue(
+                                "roster_file",
+                                e.currentTarget.files[0]
+                              );
+                              setFieldValue("roster", true);
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div className="chk-container disable-chk">
+                        <label htmlFor="audit">
+                          <Field
+                            type="checkbox"
+                            value="true"
+                            id="audit"
+                            checked={values.audit}
+                          />
+                          Latest financial audit
+                        </label>
+                        {values.audit_file && grant_id ? (
+                          <a
+                            className="view-file"
+                            target="blank"
+                            href={`http://localhost:4000/${values.audit_file}`}
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          <input
+                            type="file"
+                            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                            name="audit_file"
+                            onChange={e => {
+                              setFieldValue(
+                                "audit_file",
+                                e.currentTarget.files[0]
+                              );
+                              setFieldValue("audit", true);
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div className="chk-container disable-chk">
+                        <label htmlFor="proof">
+                          <Field
+                            type="checkbox"
+                            value="true"
+                            id="proof"
+                            checked={values.proof}
+                          />
+                          Proof of organization’s active 501(c)(3) non-profit
+                          status from the Internal Revenue Service
+                        </label>
+                        {values.proof_file && grant_id ? (
+                          <a
+                            className="view-file"
+                            target="blank"
+                            href={`http://localhost:4000/${values.proof_file}`}
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          <input
+                            type="file"
+                            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                            name="proof_file"
+                            onChange={e => {
+                              setFieldValue(
+                                "proof_file",
+                                e.currentTarget.files[0]
+                              );
+                              setFieldValue("proof", true);
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div className="chk-container disable-chk DNI">
+                        <label htmlFor="income">
+                          <Field
+                            type="checkbox"
+                            value="true"
+                            id="income"
+                            checked={values.income}
+                          />
+                          Last fiscal year income statement detailing sources
+                          and use of funds
+                        </label>
+                      </div>
+                      <div className="chk-container disable-chk">
+                        <label htmlFor="letters">
+                          <Field
+                            type="checkbox"
+                            value="true"
+                            id="letters"
+                            checked={values.letters}
+                          />
+                          Letters of Support/ Memorandums of Agreement from
+                          collaborating agencies/ partners
+                        </label>
+                        {values.letters_file && grant_id ? (
+                          <a
+                            className="view-file"
+                            target="blank"
+                            href={`http://localhost:4000/${values.letters_file}`}
+                          >
+                            View File
+                          </a>
+                        ) : (
+                          <input
+                            type="file"
+                            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                            name="letters_file"
+                            onChange={e => {
+                              setFieldValue(
+                                "letters_file",
+                                e.currentTarget.files[0]
+                              );
+                              setFieldValue("letters", true);
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  <div>{getFiles(values, setFieldValue)}</div>
+                  <div className="row files-dropdown">
+                    <Dropdown
+                      options={options}
+                      onChange={optionChange}
+                      value={defaultOption}
+                      placeholder="Select an option"
+                      className="col-sm-8"
+                    />
+                    <div className="col-sm-4">
+                      <button className="file-btn" onClick={openFileSelector}>
+                        Select Files
+                      </button>
+                      <input
+                        ref={fileRef}
+                        className="DNI"
+                        type="file"
+                        accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                        name="file_upload"
+                        onChange={e => {
+                          setFieldValue(
+                            `${defaultOption.value}_file`,
+                            e.currentTarget.files[0]
+                          );
+                          setFieldValue(defaultOption.value, true);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <h5 className="sub-title MT30">Project Information:</h5>
+                <div>
+                  <div className="input-container row">
+                    <label className="col-sm-2 required">
+                      Project Title:
+                    </label>
+                    <input
+                      className="col-sm-10"
+                      type="text"
+                      name="title"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.title}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-2 required">
+                      Project Director:
+                    </label>
+                    <input
+                      className="col-sm-10"
+                      type="text"
+                      name="director"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.director}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-2 required">
+                      Amount of funding requested:
+                    </label>
+                    <input
+                      className="col-sm-10"
+                      type="text"
+                      name="funding"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.funding}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      Is this a new project or a continuation of a current
+                      project?:
+                    </label>
+                    {/* <input
+                      className="col-sm-6"
+                      type="text"
+                      name="new_or_current"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.new_or_current}
+                    /> */}
+                    <label className="col-sm-2">
+                      <input
+                        type="radio"
+                        name="new_or_current"
+                        value="Yes"
+                        checked={values.new_or_current === "Yes"}
+                        onChange={() =>
+                          setFieldValue("new_or_current", "Yes")
+                        }
+                      />
+                      Yes
+                    </label>
+                    <label className="col-sm-2">
+                      <input
+                        type="radio"
+                        name="new_or_current"
+                        value="No"
+                        checked={values.new_or_current === "No"}
+                        onChange={() => setFieldValue("new_or_current", "No")}
+                      />
+                      No
+                    </label>
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      Have you received funding from the LiveWell Grant
+                      Program in the past? Please detail previous grant
+                      amount(s), and if outcomes from previous award(s) were
+                      met.
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="funding_past"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.funding_past}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      Project Narrative (150 word maximum):
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="synopsis"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.synopsis}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      Project Implementation (250 word maximum):
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="implementation"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.implementation}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      How does this project directly address one or more of
+                      the current priorities of the 2020 LiveWell Grant cycle?
+                      (List provided in RFP):
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="rfp"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.rfp}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      Which of the six key ZIP codes will be served by this
+                      project? List all that apply. How will funds be tracked
+                      to ensure proper allocation? (List provided in RFP):
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="zip"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.zip}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      What are the suspected outcomes of this project?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="main_outcomes"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.main_outcomes}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      How will outcomes be evaluated?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="outcomes"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.outcomes}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6">
+                      Describe how this project addresses health equity:
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="equity"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.equity}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6">
+                      Describe any collaborative efforts and list supporting
+                      organizations (if applicable):
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="collaborative"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.collaborative}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6">
+                      Identify other sources of support for this project
+                      (indicate if funding has been secured):
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="sources"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.sources}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      What is the sustainability plan for this project?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="sustainability"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.sustainability}
+                    />
+                  </div>
+                  <div className="input-container row DNI">
+                    <label className="col-sm-6">
+                      The Liberty Hospital Half Marathon is the primary source
+                      of funds for the LiveWell Grant Program. An effort to
+                      recruit volunteers and participants, and promotion of
+                      the event is expected of awardee organizations. Please
+                      describe how your organization(s) will support and raise
+                      awareness of the event.
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="describe"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.describe}
+                    />
+                  </div>
+                  <div className="p-text MT30">
+                    Please complete the following information on project
+                    beneficiaries:
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      1. How many people will this project serve?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="no_of_people"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.no_of_people}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      2. Describe the population served (socioeconomic status,
+                      age, gender, etc.)
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="socio"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.socio}
+                    />
+                  </div>
+                  <div className="input-container row DNI">
+                    <label className="col-sm-6 required">
+                      3. What are the age demographics for the population
+                      served?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="age"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.age}
+                    />
+                  </div>
+                  <div className="input-container row DNI">
+                    <label className="col-sm-6 required">
+                      4. What are the gender demographics for the population
+                      served?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="gender"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.gender}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      3. How are clients/ recipients of service selected or
+                      found?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="clients"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.clients}
+                    />
+                  </div>
+                  <div className="input-container row">
+                    <label className="col-sm-6 required">
+                      4. Is the population served medically underinsured/
+                      underserved?
+                    </label>
+                    <input
+                      className="col-sm-6"
+                      type="text"
+                      name="population"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.population}
+                    />
+                  </div>
+                </div>
+                <div className="copies-container separate-container">
+                  <div className="p-text">
+                    Please attach copies of the following documents with your
+                    grant application:
+                  </div>
+                  
