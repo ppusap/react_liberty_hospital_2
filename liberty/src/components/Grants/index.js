@@ -436,9 +436,7 @@ export default function Grant({ match }) {
                               target="blank"
                               href={`http://localhost:4000/${values.roster_file}`}
                             >
-                        
-                            </a>
-                            View File
+                              View File
                             </a>
                           ) : (
                             <input
@@ -505,3 +503,19 @@ export default function Grant({ match }) {
                               target="blank"
                               href={`http://localhost:4000/${values.proof_file}`}
                             >
+                              View File
+                            </a>
+                             ) : (
+                              <input
+                                type="file"
+                                accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                                name="proof_file"
+                                onChange={e => {
+                                  setFieldValue(
+                                    "proof_file",
+                                    e.currentTarget.files[0]
+                                  );
+                                  setFieldValue("proof", true);
+                                }}
+                              />
+                            )}
