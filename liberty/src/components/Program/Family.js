@@ -16,3 +16,16 @@ export default function Family() {
       patient_contact: null,
       type: "family"
     });
+    const [submitting, setSubmitting] = useState(null);
+
+    useEffect(() => {
+      async function getData() {
+        let res = await get("family");
+        if (Object.keys(res.data).length) {
+          setInitial({ ...res.data, type: "family" });
+          setKey(+new Date());
+        }
+      }
+  
+      getData();
+    }, []);
