@@ -435,4 +435,73 @@ export default function Grant({ match }) {
                               className="view-file"
                               target="blank"
                               href={`http://localhost:4000/${values.roster_file}`}
-                            ></a>
+                            >
+                        
+                            </a>
+                            View File
+                            </a>
+                          ) : (
+                            <input
+                              type="file"
+                              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                              name="roster_file"
+                              onChange={e => {
+                                setFieldValue(
+                                  "roster_file",
+                                  e.currentTarget.files[0]
+                                );
+                                setFieldValue("roster", true);
+                              }}
+                            />
+                          )}
+                        </div>
+                        <div className="chk-container disable-chk">
+                          <label htmlFor="audit">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="audit"
+                              checked={values.audit}
+                            />
+                            Latest financial audit
+                          </label>
+                          {values.audit_file && grant_id ? (
+                            <a
+                              className="view-file"
+                              target="blank"
+                              href={`http://localhost:4000/${values.audit_file}`}
+                            >
+                              View File
+                            </a>
+                          ) : (
+                            <input
+                              type="file"
+                              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                              name="audit_file"
+                              onChange={e => {
+                                setFieldValue(
+                                  "audit_file",
+                                  e.currentTarget.files[0]
+                                );
+                                setFieldValue("audit", true);
+                              }}
+                            />
+                          )}
+                        </div>
+                        <div className="chk-container disable-chk">
+                          <label htmlFor="proof">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="proof"
+                              checked={values.proof}
+                            />
+                            Proof of organization’s active 501(c)(3) non-profit
+                            status from the Internal Revenue Service
+                          </label>
+                          {values.proof_file && grant_id ? (
+                            <a
+                              className="view-file"
+                              target="blank"
+                              href={`http://localhost:4000/${values.proof_file}`}
+                            >
