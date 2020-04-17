@@ -29,3 +29,13 @@ export default function Family() {
   
       getData();
     }, []);
+
+    const onSubmit = async values => {
+      setSubmitting(true);
+      if (initial.id) {
+        let res = await update(values);
+      } else {
+        let res = await create(values);
+      }
+      setSubmitting(false);
+    };
