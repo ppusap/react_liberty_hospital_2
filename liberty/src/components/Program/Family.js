@@ -39,3 +39,12 @@ export default function Family() {
       }
       setSubmitting(false);
     };
+
+    return (
+      <div className="patient-assistance">
+        <Helmet>
+          <title>Liberty Hospital Foundation - Hughes Family Assistance</title>
+        </Helmet>
+        <Header />
+  
+    
