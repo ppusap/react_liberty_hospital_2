@@ -47,3 +47,7 @@ export default function Family() {
       </Helmet>
       <Header />
       <div className="main-container" key={key}>
+        <h3 className="title">Hughes Family Assistance</h3>
+        <div className="download-container">
+          <button onClick={() => download("family")}>Download List</button>
+        </div>
