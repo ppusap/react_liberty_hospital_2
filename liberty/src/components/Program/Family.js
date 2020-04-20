@@ -51,3 +51,9 @@ export default function Family() {
         <div className="download-container">
           <button onClick={() => download("family")}>Download List</button>
         </div>
+        <Formik
+          initialValues={initial}
+          // validationSchema={ScholarshipSchema}
+          validateOnBlur={false}
+          validateOnChange={false}
+        >
