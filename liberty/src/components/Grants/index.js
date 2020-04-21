@@ -519,3 +519,35 @@ export default function Grant({ match }) {
                                 }}
                               />
                             )}
+                            </div>
+                        <div className="chk-container disable-chk DNI">
+                          <label htmlFor="income">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="income"
+                              checked={values.income}
+                            />
+                            Last fiscal year income statement detailing sources
+                            and use of funds
+                          </label>
+                        </div>
+                        <div className="chk-container disable-chk">
+                          <label htmlFor="letters">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="letters"
+                              checked={values.letters}
+                            />
+                            Letters of Support/ Memorandums of Agreement from
+                            collaborating agencies/ partners
+                          </label>
+                          {values.letters_file && grant_id ? (
+                            <a
+                              className="view-file"
+                              target="blank"
+                              href={`http://localhost:4000/${values.letters_file}`}
+                            >
+                              View File
+                            </a>
