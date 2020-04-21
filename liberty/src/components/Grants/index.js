@@ -551,3 +551,29 @@ export default function Grant({ match }) {
                             >
                               View File
                             </a>
+                              ) : (
+                                <input
+                                  type="file"
+                                  accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                                  name="letters_file"
+                                  onChange={e => {
+                                    setFieldValue(
+                                      "letters_file",
+                                      e.currentTarget.files[0]
+                                    );
+                                    setFieldValue("letters", true);
+                                  }}
+                                />
+                              )}
+                            </div>
+                          </div>
+                        )}
+                        <div>{getFiles(values, setFieldValue)}</div>
+                        <div className="row files-dropdown">
+                          <Dropdown
+                            options={options}
+                            onChange={optionChange}
+                            value={defaultOption}
+                            placeholder="Select an option"
+                            className="col-sm-8"
+                          />
