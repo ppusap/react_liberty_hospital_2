@@ -577,3 +577,38 @@ export default function Grant({ match }) {
                             placeholder="Select an option"
                             className="col-sm-8"
                           />
+                           <div className="col-sm-4">
+                        <button className="file-btn" onClick={openFileSelector}>
+                          Select Files
+                        </button>
+                        <input
+                          ref={fileRef}
+                          className="DNI"
+                          type="file"
+                          accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                          name="file_upload"
+                          onChange={e => {
+                            setFieldValue(
+                              `${defaultOption.value}_file`,
+                              e.currentTarget.files[0]
+                            );
+                            setFieldValue(defaultOption.value, true);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <h5 className="sub-title MT30">Project Information:</h5>
+                  <div>
+                    <div className="input-container row">
+                      <label className="col-sm-2 required">
+                        Project Title:
+                      </label>
+                      <input
+                        className="col-sm-10"
+                        type="text"
+                        name="title"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.title}
+                      />
