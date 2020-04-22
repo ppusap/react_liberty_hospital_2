@@ -519,3 +519,96 @@ export default function Grant({ match }) {
                                 }}
                               />
                             )}
+                            </div>
+                        <div className="chk-container disable-chk DNI">
+                          <label htmlFor="income">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="income"
+                              checked={values.income}
+                            />
+                            Last fiscal year income statement detailing sources
+                            and use of funds
+                          </label>
+                        </div>
+                        <div className="chk-container disable-chk">
+                          <label htmlFor="letters">
+                            <Field
+                              type="checkbox"
+                              value="true"
+                              id="letters"
+                              checked={values.letters}
+                            />
+                            Letters of Support/ Memorandums of Agreement from
+                            collaborating agencies/ partners
+                          </label>
+                          {values.letters_file && grant_id ? (
+                            <a
+                              className="view-file"
+                              target="blank"
+                              href={`http://localhost:4000/${values.letters_file}`}
+                            >
+                              View File
+                            </a>
+                              ) : (
+                                <input
+                                  type="file"
+                                  accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                                  name="letters_file"
+                                  onChange={e => {
+                                    setFieldValue(
+                                      "letters_file",
+                                      e.currentTarget.files[0]
+                                    );
+                                    setFieldValue("letters", true);
+                                  }}
+                                />
+                              )}
+                            </div>
+                          </div>
+                        )}
+                        <div>{getFiles(values, setFieldValue)}</div>
+                        <div className="row files-dropdown">
+                          <Dropdown
+                            options={options}
+                            onChange={optionChange}
+                            value={defaultOption}
+                            placeholder="Select an option"
+                            className="col-sm-8"
+                          />
+                           <div className="col-sm-4">
+                        <button className="file-btn" onClick={openFileSelector}>
+                          Select Files
+                        </button>
+                        <input
+                          ref={fileRef}
+                          className="DNI"
+                          type="file"
+                          accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                          name="file_upload"
+                          onChange={e => {
+                            setFieldValue(
+                              `${defaultOption.value}_file`,
+                              e.currentTarget.files[0]
+                            );
+                            setFieldValue(defaultOption.value, true);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <h5 className="sub-title MT30">Project Information:</h5>
+                  <div>
+                    <div className="input-container row">
+                      <label className="col-sm-2 required">
+                        Project Title:
+                      </label>
+                      <input
+                        className="col-sm-10"
+                        type="text"
+                        name="title"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.title}
+                      />
