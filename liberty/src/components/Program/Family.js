@@ -63,3 +63,13 @@ export default function Family() {
                 <div className="services">
                   <div className="row">
                     <div className="col-sm-3 th">Services Provided</div>
+                    <div className="col-sm-2 th">Number Served</div>
+                    <div className="col-sm-3 th">Assistance Provided</div>
+                    <div className="col-sm-2 th">Funding Used</div>
+                    <div className="col-sm-2 th">Notes</div>
+                  </div>
+                  <FieldArray
+                    name="crisis"
+                    render={arrayHelpers => (
+                      <div className="input-container">
+                        {values.crisis.length > 0
