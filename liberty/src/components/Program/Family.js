@@ -73,3 +73,8 @@ export default function Family() {
                     render={arrayHelpers => (
                       <div className="input-container">
                         {values.crisis.length > 0
+                         ? values.crisis.map((service, idx) => (
+                          <div
+                            className="sibling sibling-item row"
+                            key={idx}
+                          >
