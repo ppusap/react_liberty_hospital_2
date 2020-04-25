@@ -612,3 +612,64 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.title}
                       />
+                      </div>
+                    <div className="input-container row">
+                      <label className="col-sm-2 required">
+                        Project Director:
+                      </label>
+                      <input
+                        className="col-sm-10"
+                        type="text"
+                        name="director"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.director}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-2 required">
+                        Amount of funding requested:
+                      </label>
+                      <input
+                        className="col-sm-10"
+                        type="text"
+                        name="funding"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.funding}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        Is this a new project or a continuation of a current
+                        project?:
+                      </label>
+                      {/* <input
+                        className="col-sm-6"
+                        type="text"
+                        name="new_or_current"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.new_or_current}
+                      /> */}
+                      <label className="col-sm-2">
+                        <input
+                          type="radio"
+                          name="new_or_current"
+                          value="Yes"
+                          checked={values.new_or_current === "Yes"}
+                          onChange={() =>
+                            setFieldValue("new_or_current", "Yes")
+                          }
+                        />
+                        Yes
+                      </label>
+                      <label className="col-sm-2">
+                        <input
+                          type="radio"
+                          name="new_or_current"
+                          value="No"
+                          checked={values.new_or_current === "No"}
+                          onChange={() => setFieldValue("new_or_current", "No")}
+                        />
+                        
