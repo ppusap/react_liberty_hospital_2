@@ -903,3 +903,58 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.gender}
                       />
+                      </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        3. How are clients/ recipients of service selected or
+                        found?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="clients"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.clients}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        4. Is the population served medically underinsured/
+                        underserved?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="population"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.population}
+                      />
+                    </div>
+                  </div>
+                  <div className="copies-container separate-container">
+                    <div className="p-text">
+                      Please attach copies of the following documents with your
+                      grant application:
+                    </div>
+                    <div className="chk-container disable-chk">
+                      <label htmlFor="budget">
+                        <Field
+                          type="checkbox"
+                          value="true"
+                          id="budget"
+                          checked={values.budget}
+                        />
+                        Completed budget for proposed project, with detailed
+                        income and expenses
+                      </label>
+                      {values.budget_file && grant_id ? (
+                        <a
+                          className="view-file"
+                          target="blank"
+                          href={`http://localhost:4000/${values.budget_file}`}
+                        >
+                          View File
+                        </a>
+                      ) : (
