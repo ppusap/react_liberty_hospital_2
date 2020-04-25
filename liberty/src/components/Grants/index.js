@@ -826,3 +826,52 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.sustainability}
                       />
+                       </div>
+                    <div className="input-container row DNI">
+                      <label className="col-sm-6">
+                        The Liberty Hospital Half Marathon is the primary source
+                        of funds for the LiveWell Grant Program. An effort to
+                        recruit volunteers and participants, and promotion of
+                        the event is expected of awardee organizations. Please
+                        describe how your organization(s) will support and raise
+                        awareness of the event.
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="describe"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.describe}
+                      />
+                    </div>
+                    <div className="p-text MT30">
+                      Please complete the following information on project
+                      beneficiaries:
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        1. How many people will this project serve?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="no_of_people"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.no_of_people}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        2. Describe the population served (socioeconomic status,
+                        age, gender, etc.)
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="socio"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.socio}
+                      />
