@@ -875,3 +875,31 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.socio}
                       />
+                      </div>
+                    <div className="input-container row DNI">
+                      <label className="col-sm-6 required">
+                        3. What are the age demographics for the population
+                        served?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="age"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.age}
+                      />
+                    </div>
+                    <div className="input-container row DNI">
+                      <label className="col-sm-6 required">
+                        4. What are the gender demographics for the population
+                        served?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="gender"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.gender}
+                      />
