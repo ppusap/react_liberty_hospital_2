@@ -746,3 +746,83 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.zip}
                       />
+                      </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        What are the suspected outcomes of this project?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="main_outcomes"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.main_outcomes}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        How will outcomes be evaluated?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="outcomes"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.outcomes}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6">
+                        Describe how this project addresses health equity:
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="equity"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.equity}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6">
+                        Describe any collaborative efforts and list supporting
+                        organizations (if applicable):
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="collaborative"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.collaborative}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6">
+                        Identify other sources of support for this project
+                        (indicate if funding has been secured):
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="sources"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.sources}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        What is the sustainability plan for this project?
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="sustainability"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.sustainability}
+                      />
