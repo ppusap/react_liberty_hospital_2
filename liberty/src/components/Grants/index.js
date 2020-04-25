@@ -672,4 +672,77 @@ export default function Grant({ match }) {
                           checked={values.new_or_current === "No"}
                           onChange={() => setFieldValue("new_or_current", "No")}
                         />
-                        
+                        No
+                      </label>
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        Have you received funding from the LiveWell Grant
+                        Program in the past? Please detail previous grant
+                        amount(s), and if outcomes from previous award(s) were
+                        met.
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="funding_past"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.funding_past}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        Project Narrative (150 word maximum):
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="synopsis"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.synopsis}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        Project Implementation (250 word maximum):
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="implementation"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.implementation}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        How does this project directly address one or more of
+                        the current priorities of the 2020 LiveWell Grant cycle?
+                        (List provided in RFP):
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="rfp"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.rfp}
+                      />
+                    </div>
+                    <div className="input-container row">
+                      <label className="col-sm-6 required">
+                        Which of the six key ZIP codes will be served by this
+                        project? List all that apply. How will funds be tracked
+                        to ensure proper allocation? (List provided in RFP):
+                      </label>
+                      <input
+                        className="col-sm-6"
+                        type="text"
+                        name="zip"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.zip}
+                      />
