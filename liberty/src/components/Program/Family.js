@@ -83,3 +83,8 @@ export default function Family() {
                                     {service.name}
                                   </div>
                                 </div>
+                                <div className="col-sm-2 input-field">
+                                  <Field
+                                    type="number"
+                                    name={`crisis[${idx}].no_served`}
+                                    onChange={e =>
