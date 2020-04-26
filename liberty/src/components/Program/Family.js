@@ -88,3 +88,9 @@ export default function Family() {
                                     type="number"
                                     name={`crisis[${idx}].no_served`}
                                     onChange={e =>
+                                      numberChange(
+                                        e,
+                                        setFieldValue,
+                                        `crisis[${idx}].no_served`
+                                      )
+                                    }
