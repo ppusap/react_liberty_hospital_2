@@ -109,3 +109,10 @@ export default function Family() {
                                       <Field
                                         type="number"
                                         name={`crisis[${idx}].funding_used`}
+                                        onChange={e =>
+                                          numberChange(
+                                            e,
+                                            setFieldValue,
+                                            `crisis[${idx}].funding_used`
+                                          )
+                                        }
