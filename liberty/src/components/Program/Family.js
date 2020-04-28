@@ -103,4 +103,9 @@ export default function Family() {
                                     name={`crisis[${idx}].assistance`}
                                   />
                                 </div>
-                                {!service.is_cris
+                                {!service.is_crisis ? (
+                                  <>
+                                    <div className="col-sm-2 input-field">
+                                      <Field
+                                        type="number"
+                                        name={`crisis[${idx}].funding_used`}
