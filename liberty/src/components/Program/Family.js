@@ -99,3 +99,8 @@ export default function Family() {
                                   </div>
                                   <div className="col-sm-3 input-field">
                                     <Field
+                                    type="string"
+                                    name={`crisis[${idx}].assistance`}
+                                  />
+                                </div>
+                                {!service.is_cris
