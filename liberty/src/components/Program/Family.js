@@ -94,3 +94,8 @@ export default function Family() {
                                         `crisis[${idx}].no_served`
                                       )
                                     }
+                                    value={service.no_served}
+                                    />
+                                  </div>
+                                  <div className="col-sm-3 input-field">
+                                    <Field
