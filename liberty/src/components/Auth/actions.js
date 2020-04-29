@@ -22,3 +22,14 @@ export const login = async (dispatch, data) => {
     throw ex;
   }
 };
+
+export const logout = dispatch => {
+  localStorage.clear();
+  dispatch({
+    type: authNameSpacer("SET_LOGGED_IN"),
+    payload: {
+      isLoggedIn: false,
+      access_token: null
+    }
+  });
+};
