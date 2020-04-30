@@ -15,3 +15,13 @@ export default function PatientAssistance() {
     patient_contact: null,
     type: "gift"
   });
+  const [submitting, setSubmitting] = useState(null);
+
+  useEffect(() => {
+    async function getData() {
+      let res = await get("gift");
+      if (Object.keys(res.data).length) {
+        setInitial({ ...res.data, type: "gift" });
+        setKey(+new Date());
+      }
+    }
