@@ -123,3 +123,10 @@ export default function Family() {
                                         <Field
                                           type="text"
                                           name={`crisis[${idx}].notes`}
+                                          />
+                                          </div>
+                                        </>
+                                      ) : null}
+                                    </div>
+                                  ))
+                                : null}
