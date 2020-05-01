@@ -116,3 +116,10 @@ export default function Family() {
                                             `crisis[${idx}].funding_used`
                                           )
                                         }
+                                        value={service.funding_used}
+                                        />
+                                      </div>
+                                      <div className="col-sm-2 input-field">
+                                        <Field
+                                          type="text"
+                                          name={`crisis[${idx}].notes`}
