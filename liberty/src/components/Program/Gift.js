@@ -37,3 +37,20 @@ export default function PatientAssistance() {
     }
     setSubmitting(false);
   };
+  return (
+    <div className="patient-assistance">
+      <Helmet>
+        <title>Liberty Hospital Foundation - Kyleigh's Gift</title>
+      </Helmet>
+      <Header />
+      <div className="main-container" key={key}>
+        <h3 className="title">Kyleigh's Gift</h3>
+        <div className="download-container">
+          <button onClick={() => download("gift")}>Download List</button>
+        </div>
+        <Formik
+          initialValues={initial}
+          // validationSchema={ScholarshipSchema}
+          validateOnBlur={false}
+          validateOnChange={false}
+        >
