@@ -130,4 +130,14 @@ export default function Family() {
                                     </div>
                                   ))
                                 : null}
+
+<div className="input-container row patient-row">
+                          <label className="col-sm-4">
+                            Total # of unduplicated patients served:
+                          </label>
+                          <Field
+                            type="text"
+                            className="col-sm-8"
+                            name="no_of_unduplicated"
+                          />
                          
