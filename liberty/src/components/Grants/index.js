@@ -77,7 +77,7 @@ export default function Grant({ match }) {
     score: "",
     comments: "",
     isEmployee: false,
-    user_id: userDetails.id
+    user_id: userDetails.id,
   });
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -91,11 +91,11 @@ export default function Grant({ match }) {
   const [allActionsDisable, setAllActionsDisable] = useState(false);
   const budgetRef = useRef();
 
-  const isObjectEmpty = obj => {
+  const isObjectEmpty = (obj) => {
     return Object.keys(obj).length === 0;
   };
 
-  const onSubmit = async values => {
+  const onSubmit = async (values) => {
     try {
       setSubmitting(true);
       if (!grant_id) {
@@ -117,11 +117,11 @@ export default function Grant({ match }) {
     fileRef.current.click();
   };
 
-  const optionChange = obj => {
+  const optionChange = (obj) => {
     changeOption(obj);
   };
 
-  const removeFile = file_type => {};
+  const removeFile = (file_type) => {};
 
   const getFiles = (values, setFieldValue) => {
     return options.map((e, idx) => {
@@ -155,10 +155,10 @@ export default function Grant({ match }) {
   useEffect(() => {
     setUser(userDetails);
     setType(userDetails.type || "user");
-    if (userDetails.type === "employee") {
+    if (userDetails.type !== "user") {
       GrantSchema.shape({
         score: Yup.number().required("Required"),
-        comments: Yup.string().required("Required")
+        comments: Yup.string().required("Required"),
       });
     }
     async function getData() {
@@ -175,7 +175,7 @@ export default function Grant({ match }) {
       res.data = {
         ...res.data,
         date: new Date(res.data.date),
-        isEmployee: userDetails.type === "employee"
+        isEmployee: userDetails.type !== "user",
       };
       setInitial(res.data);
       setLoading(false);
@@ -211,10 +211,10 @@ export default function Grant({ match }) {
                 handleChange,
                 handleBlur,
                 validateForm,
-                setFieldValue
+                setFieldValue,
               }) => (
                 <form
-                  onSubmit={e => e.preventDefault()}
+                  onSubmit={(e) => e.preventDefault()}
                   className={disabled ? "disabled" : ""}
                 >
                   <div className="input-container row">
@@ -224,7 +224,7 @@ export default function Grant({ match }) {
                       selected={values.date}
                       dateFormat="MMMM d, yyyy"
                       name="date"
-                      onChange={date => setFieldValue("date", date)}
+                      onChange={(date) => setFieldValue("date", date)}
                     />
                   </div>
                   <h5 className="sub-title">Agency Information:</h5>
@@ -234,6 +234,7 @@ export default function Grant({ match }) {
                         Name of Agency:
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-8"
                         type="text"
                         name="agency"
@@ -247,6 +248,7 @@ export default function Grant({ match }) {
                         Primary Agency Tax ID:
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-8"
                         type="text"
                         name="tax_id"
@@ -261,6 +263,7 @@ export default function Grant({ match }) {
                           Primary Agency:
                         </label>
                         <input
+                          maxlength="50"
                           className="col-sm-8"
                           type="text"
                           name="primary"
@@ -276,6 +279,7 @@ export default function Grant({ match }) {
                           Contact Person:
                         </label>
                         <input
+                          maxlength="50"
                           className="col-sm-8"
                           type="text"
                           name="contact"
@@ -286,7 +290,7 @@ export default function Grant({ match }) {
                       </div>
                       <div className="input-container col-sm-6 row">
                         <label className="col-sm-4 required">Title:</label>
-                        {/* <input
+                        {/* <input maxlength="50"
                         className="col-sm-8"
                         type="text"
                         name="person_title"
@@ -315,6 +319,7 @@ export default function Grant({ match }) {
                         Mailing Address:
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-9"
                         type="text"
                         name="address"
@@ -327,10 +332,11 @@ export default function Grant({ match }) {
                       <div className="input-container col-sm-4 row">
                         <label className="col-sm-4 required">Phone:</label>
                         <input
+                          maxlength="50"
                           className="col-sm-8"
                           type="number"
                           name="phone"
-                          onChange={e =>
+                          onChange={(e) =>
                             numberChange(e, setFieldValue, "phone")
                           }
                           onBlur={handleBlur}
@@ -343,6 +349,7 @@ export default function Grant({ match }) {
                       <div className="input-container col-sm-4 row">
                         <label className="col-sm-4 required">Fax:</label>
                         <input
+                          maxlength="50"
                           className="col-sm-8"
                           type="text"
                           name="fax"
@@ -354,6 +361,7 @@ export default function Grant({ match }) {
                       <div className="input-container col-sm-4 row ML34">
                         <label className="col-sm-4 required">E-Mail:</label>
                         <input
+                          maxlength="50"
                           className="col-sm-8"
                           type="text"
                           name="email"
@@ -371,6 +379,7 @@ export default function Grant({ match }) {
                         Briefly summarize the mission of your agency:
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-8"
                         type="text"
                         name="info"
@@ -407,10 +416,11 @@ export default function Grant({ match }) {
                             </a>
                           ) : (
                             <input
+                              maxlength="50"
                               type="file"
                               accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
                               name="annual_file"
-                              onChange={e => {
+                              onChange={(e) => {
                                 setFieldValue(
                                   "annual_file",
                                   e.currentTarget.files[0]
@@ -440,10 +450,11 @@ export default function Grant({ match }) {
                             </a>
                           ) : (
                             <input
+                              maxlength="50"
                               type="file"
                               accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
                               name="roster_file"
-                              onChange={e => {
+                              onChange={(e) => {
                                 setFieldValue(
                                   "roster_file",
                                   e.currentTarget.files[0]
@@ -473,10 +484,11 @@ export default function Grant({ match }) {
                             </a>
                           ) : (
                             <input
+                              maxlength="50"
                               type="file"
                               accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
                               name="audit_file"
-                              onChange={e => {
+                              onChange={(e) => {
                                 setFieldValue(
                                   "audit_file",
                                   e.currentTarget.files[0]
@@ -505,21 +517,22 @@ export default function Grant({ match }) {
                             >
                               View File
                             </a>
-                             ) : (
-                              <input
-                                type="file"
-                                accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-                                name="proof_file"
-                                onChange={e => {
-                                  setFieldValue(
-                                    "proof_file",
-                                    e.currentTarget.files[0]
-                                  );
-                                  setFieldValue("proof", true);
-                                }}
-                              />
-                            )}
-                            </div>
+                          ) : (
+                            <input
+                              maxlength="50"
+                              type="file"
+                              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                              name="proof_file"
+                              onChange={(e) => {
+                                setFieldValue(
+                                  "proof_file",
+                                  e.currentTarget.files[0]
+                                );
+                                setFieldValue("proof", true);
+                              }}
+                            />
+                          )}
+                        </div>
                         <div className="chk-container disable-chk DNI">
                           <label htmlFor="income">
                             <Field
@@ -551,43 +564,45 @@ export default function Grant({ match }) {
                             >
                               View File
                             </a>
-                              ) : (
-                                <input
-                                  type="file"
-                                  accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-                                  name="letters_file"
-                                  onChange={e => {
-                                    setFieldValue(
-                                      "letters_file",
-                                      e.currentTarget.files[0]
-                                    );
-                                    setFieldValue("letters", true);
-                                  }}
-                                />
-                              )}
-                            </div>
-                          </div>
-                        )}
-                        <div>{getFiles(values, setFieldValue)}</div>
-                        <div className="row files-dropdown">
-                          <Dropdown
-                            options={options}
-                            onChange={optionChange}
-                            value={defaultOption}
-                            placeholder="Select an option"
-                            className="col-sm-8"
-                          />
-                           <div className="col-sm-4">
+                          ) : (
+                            <input
+                              maxlength="50"
+                              type="file"
+                              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                              name="letters_file"
+                              onChange={(e) => {
+                                setFieldValue(
+                                  "letters_file",
+                                  e.currentTarget.files[0]
+                                );
+                                setFieldValue("letters", true);
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    )}
+                    <div>{getFiles(values, setFieldValue)}</div>
+                    <div className="row files-dropdown">
+                      <Dropdown
+                        options={options}
+                        onChange={optionChange}
+                        value={defaultOption}
+                        placeholder="Select an option"
+                        className="col-sm-8"
+                      />
+                      <div className="col-sm-4">
                         <button className="file-btn" onClick={openFileSelector}>
                           Select Files
                         </button>
                         <input
+                          maxlength="50"
                           ref={fileRef}
                           className="DNI"
                           type="file"
                           accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
                           name="file_upload"
-                          onChange={e => {
+                          onChange={(e) => {
                             setFieldValue(
                               `${defaultOption.value}_file`,
                               e.currentTarget.files[0]
@@ -605,6 +620,8 @@ export default function Grant({ match }) {
                         Project Title:
                       </label>
                       <input
+                        maxlength="50"
+                        maxlength="50"
                         className="col-sm-10"
                         type="text"
                         name="title"
@@ -612,12 +629,14 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.title}
                       />
-                      </div>
+                    </div>
                     <div className="input-container row">
                       <label className="col-sm-2 required">
                         Project Director:
                       </label>
                       <input
+                        maxlength="50"
+                        maxlength="50"
                         className="col-sm-10"
                         type="text"
                         name="director"
@@ -631,6 +650,8 @@ export default function Grant({ match }) {
                         Amount of funding requested:
                       </label>
                       <input
+                        maxlength="50"
+                        maxlength="50"
                         className="col-sm-10"
                         type="text"
                         name="funding"
@@ -644,7 +665,7 @@ export default function Grant({ match }) {
                         Is this a new project or a continuation of a current
                         project?:
                       </label>
-                      {/* <input
+                      {/* <input maxlength="50" maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="new_or_current"
@@ -654,6 +675,8 @@ export default function Grant({ match }) {
                       /> */}
                       <label className="col-sm-2">
                         <input
+                          maxlength="50"
+                          maxlength="50"
                           type="radio"
                           name="new_or_current"
                           value="Yes"
@@ -666,6 +689,8 @@ export default function Grant({ match }) {
                       </label>
                       <label className="col-sm-2">
                         <input
+                          maxlength="50"
+                          maxlength="50"
                           type="radio"
                           name="new_or_current"
                           value="No"
@@ -683,6 +708,8 @@ export default function Grant({ match }) {
                         met.
                       </label>
                       <input
+                        maxlength="50"
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="funding_past"
@@ -696,6 +723,8 @@ export default function Grant({ match }) {
                         Project Narrative (150 word maximum):
                       </label>
                       <input
+                        maxlength="50"
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="synopsis"
@@ -709,6 +738,8 @@ export default function Grant({ match }) {
                         Project Implementation (250 word maximum):
                       </label>
                       <input
+                        maxlength="50"
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="implementation"
@@ -724,6 +755,7 @@ export default function Grant({ match }) {
                         (List provided in RFP):
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="rfp"
@@ -739,6 +771,7 @@ export default function Grant({ match }) {
                         to ensure proper allocation? (List provided in RFP):
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="zip"
@@ -746,12 +779,13 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.zip}
                       />
-                      </div>
+                    </div>
                     <div className="input-container row">
                       <label className="col-sm-6 required">
                         What are the suspected outcomes of this project?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="main_outcomes"
@@ -765,6 +799,7 @@ export default function Grant({ match }) {
                         How will outcomes be evaluated?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="outcomes"
@@ -778,6 +813,7 @@ export default function Grant({ match }) {
                         Describe how this project addresses health equity:
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="equity"
@@ -792,6 +828,7 @@ export default function Grant({ match }) {
                         organizations (if applicable):
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="collaborative"
@@ -806,6 +843,7 @@ export default function Grant({ match }) {
                         (indicate if funding has been secured):
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="sources"
@@ -819,6 +857,7 @@ export default function Grant({ match }) {
                         What is the sustainability plan for this project?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="sustainability"
@@ -826,7 +865,7 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.sustainability}
                       />
-                       </div>
+                    </div>
                     <div className="input-container row DNI">
                       <label className="col-sm-6">
                         The Liberty Hospital Half Marathon is the primary source
@@ -837,6 +876,7 @@ export default function Grant({ match }) {
                         awareness of the event.
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="describe"
@@ -854,6 +894,7 @@ export default function Grant({ match }) {
                         1. How many people will this project serve?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="no_of_people"
@@ -868,6 +909,7 @@ export default function Grant({ match }) {
                         age, gender, etc.)
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="socio"
@@ -875,13 +917,14 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.socio}
                       />
-                      </div>
+                    </div>
                     <div className="input-container row DNI">
                       <label className="col-sm-6 required">
                         3. What are the age demographics for the population
                         served?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="age"
@@ -896,6 +939,7 @@ export default function Grant({ match }) {
                         served?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="gender"
@@ -903,13 +947,14 @@ export default function Grant({ match }) {
                         onBlur={handleBlur}
                         value={values.gender}
                       />
-                      </div>
+                    </div>
                     <div className="input-container row">
                       <label className="col-sm-6 required">
                         3. How are clients/ recipients of service selected or
                         found?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="clients"
@@ -924,6 +969,7 @@ export default function Grant({ match }) {
                         underserved?
                       </label>
                       <input
+                        maxlength="50"
                         className="col-sm-6"
                         type="text"
                         name="population"
@@ -958,3 +1004,272 @@ export default function Grant({ match }) {
                           View File
                         </a>
                       ) : (
+                        <input
+                          maxlength="50"
+                          type="file"
+                          accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                          name="budget_file"
+                          ref={budgetRef}
+                          onChange={(e) => {
+                            setFieldValue(
+                              "budget_file",
+                              e.currentTarget.files[0]
+                            );
+                            setFieldValue("budget", true);
+                          }}
+                        />
+                      )}
+                      {values.budget_file ? (
+                        <label
+                          className="remove-file"
+                          onClick={() => {
+                            budgetRef.current.value = null;
+                            setFieldValue("budget", null);
+                            setFieldValue("budget_file", null);
+                          }}
+                        ></label>
+                      ) : null}
+                    </div>
+                    <div className="chk-container disable-chk">
+                      <label htmlFor="isAdditional">
+                        <Field
+                          type="checkbox"
+                          value="true"
+                          id="isAdditional"
+                          checked={values.isAdditional}
+                        />
+                        Any Additional:
+                      </label>
+                    </div>
+                    {values.isAdditional ? (
+                      <div className="additional-textarea">
+                        <textarea
+                          name="additional"
+                          onBlur={handleBlur}
+                          value={values.additional}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <h5 className="sub-title MT30">Submission</h5>
+                  <div className="copies-container separate-container">
+                    <div className="p-text">
+                      With my signature I certify the following: The above
+                      information is correct; I am authorized by the governing
+                      board of this organization to submit this grant
+                      application to the Liberty Hospital Foundation; this
+                      organization is in good standing with the IRS, retains its
+                      501(c)(3) tax-exempt status; this organization does not
+                      discriminate on the basis of race, religion, sexual
+                      preference, physical circumstances, or national origin.
+                    </div>
+                  </div>
+                  <div className="flex-container row">
+                    <div className="input-container col-sm-6 row">
+                      <input
+                        maxlength="50"
+                        className="col-sm-12"
+                        type="text"
+                        name="head"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.head}
+                        placeholder="Printed Name, Head of Primary Agency"
+                      />
+                    </div>
+                    <div className="input-container col-sm-6 row">
+                      <input
+                        maxlength="50"
+                        className="col-sm-12"
+                        type="text"
+                        name="head_title"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.head_title}
+                        placeholder="Title"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-container row">
+                    <div className="input-container col-sm-6 row">
+                      <input
+                        maxlength="50"
+                        className="col-sm-12"
+                        type="text"
+                        name="signature"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.signature}
+                        placeholder="Signature, Head of Primary Agency (Required)"
+                      />
+                    </div>
+                    <div className="input-container col-sm-6 row bottom">
+                      <DatePicker
+                        selected={values.date}
+                        dateFormat="MMMM d, yyyy"
+                        name="date"
+                        onChange={(date) => setFieldValue("date", date)}
+                      />
+                      {/* <input maxlength="50"
+                        className="col-sm-12"
+                        type="text"
+                        name="date"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.date}
+                        placeholder="Date"
+                      /> */}
+                    </div>
+                  </div>
+                  {submitting ? (
+                    <div className="loading">Loading...</div>
+                  ) : null}
+                  <div className="p-text MT20 DNI">
+                    Please submit grant applications with all required
+                    attachments via e-mail by 12:00 p.m. on Wednesday, March 4
+                    to:
+                    <div className="send-to">
+                      Maddison Watkins, Operations Coordinator
+                      <br /> Liberty Hospital Foundation
+                      <br />
+                      <a href="mailto:maddison.watkins@libertyhospital.org">
+                        maddison.watkins@libertyhospital.org
+                      </a>
+                      <br /> Hard copy applications will not be accepted.
+                    </div>
+                  </div>
+                  {actions ? (
+                    <div
+                      className={`actions-container ${
+                        submitting ? "pointer-none" : ""
+                      }`}
+                    >
+                      <button
+                        onClick={() =>
+                          validateForm().then((res) => {
+                            if (isObjectEmpty(res))
+                              onSubmit({
+                                ...values,
+                                status: "pending",
+                              });
+                          })
+                        }
+                      >
+                        Submit
+                      </button>
+                      <button
+                        onClick={() =>
+                          onSubmit({
+                            ...values,
+                            status: "draft",
+                          })
+                        }
+                      >
+                        Save
+                      </button>
+                    </div>
+                  ) : null}
+                  {type !== "user" && !actions ? (
+                    <div
+                      className={`employee-actions ${
+                        allActionsDisable ? "all-disable" : ""
+                      }`}
+                    >
+                      <div className="flex-container row">
+                        <div className="input-container col-sm-6 row">
+                          <label className="col-sm-4 required">Score:</label>
+                          <input
+                            maxlength="50"
+                            className="col-sm-8"
+                            type="number"
+                            name="score"
+                            onChange={(e) =>
+                              numberChange(e, setFieldValue, "score")
+                            }
+                            onBlur={handleBlur}
+                            value={values.score}
+                          />
+                        </div>
+                        <div className="input-container col-sm-6 row">
+                          <label className="col-sm-4 required">Comments:</label>
+                          <input
+                            maxlength="50"
+                            className="col-sm-8"
+                            type="text"
+                            name="comments"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.comments}
+                          />
+                        </div>
+                      </div>
+                      {allActionsDisable ? null : (
+                        <div className="actions-container">
+                          <button
+                            onClick={() =>
+                              validateForm().then((res) => {
+                                if (isObjectEmpty(res))
+                                  onSubmit({
+                                    ...values,
+                                    status: "accepted",
+                                  });
+                              })
+                            }
+                          >
+                            Accepted
+                          </button>
+                          <button
+                            onClick={() =>
+                              validateForm().then((res) => {
+                                if (isObjectEmpty(res))
+                                  onSubmit({
+                                    ...values,
+                                    status: "rejected",
+                                  });
+                              })
+                            }
+                          >
+                            Rejected
+                          </button>
+                          <button
+                            onClick={() =>
+                              validateForm().then((res) => {
+                                if (isObjectEmpty(res))
+                                  onSubmit({
+                                    ...values,
+                                    status: "in progress",
+                                  });
+                              })
+                            }
+                          >
+                            Save
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ) : null}
+                  {!isObjectEmpty(errors) ? (
+                    <div className="error-msg">Please fill out all fields</div>
+                  ) : null}
+                </form>
+              )}
+            </Formik>
+          )}
+        </div>
+      ) : (
+        <div className="success-message grant-success">
+          <h3 className="title">
+            Successfully {grant_id ? "updated" : "created"} Grant application
+          </h3>
+          <p>
+            This is your grant number <code>{grant.id || grant_id}</code>. You
+            can use this to check status of your grant.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
