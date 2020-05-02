@@ -7,7 +7,7 @@ export default function EmployeeApproval() {
   const [users, setUsers] = useState([]);
   const userDetails = localStorage.user ? JSON.parse(localStorage.user) : null;
   const type = userDetails?.type;
- 
+
   useEffect(() => {
     async function getData() {
       let res = await unapproved();

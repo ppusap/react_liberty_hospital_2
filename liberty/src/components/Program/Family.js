@@ -14,13 +14,20 @@ export default function Family() {
     additional_services: null,
     story_patient: null,
     patient_contact: null,
-    type: "family"
+    type: "family",
   });
   const [submitting, setSubmitting] = useState(null);
 
   useEffect(() => {
     async function getData() {
       let res = await get("family");
+      res.data.crisis = res.data.crisis.map((e) => {
+        return {
+          ...e,
+          funding_used: e.funding_used || 0,
+          no_served: e.no_served || 0,
+        };
+      });
       if (Object.keys(res.data).length) {
         setInitial({ ...res.data, type: "family" });
         setKey(+new Date());
@@ -30,7 +37,7 @@ export default function Family() {
     getData();
   }, []);
 
-  const onSubmit = async values => {
+  const onSubmit = async (values) => {
     setSubmitting(true);
     if (initial.id) {
       let res = await update(values);
@@ -49,7 +56,7 @@ export default function Family() {
       <div className="main-container" key={key}>
         <h3 className="title">Hughes Family Assistance</h3>
         <div className="download-container">
-          <button onClick={() => download("family")}>Download List</button>
+          <button onClick={() => download("family")}>Export to excel</button>
         </div>
         <Formik
           initialValues={initial}
@@ -58,7 +65,7 @@ export default function Family() {
           validateOnChange={false}
         >
           {({ values, setFieldValue }) => (
-            <form onSubmit={e => e.preventDefault()}>
+            <form onSubmit={(e) => e.preventDefault()}>
               <div className="form-container sibling-container">
                 <div className="services">
                   <div className="row">
@@ -70,7 +77,7 @@ export default function Family() {
                   </div>
                   <FieldArray
                     name="crisis"
-                    render={arrayHelpers => (
+                    render={(arrayHelpers) => (
                       <div className="input-container">
                         {values.crisis.length > 0
                           ? values.crisis.map((service, idx) => (
@@ -87,7 +94,7 @@ export default function Family() {
                                   <Field
                                     type="number"
                                     name={`crisis[${idx}].no_served`}
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       numberChange(
                                         e,
                                         setFieldValue,
@@ -95,10 +102,10 @@ export default function Family() {
                                       )
                                     }
                                     value={service.no_served}
-                                    />
-                                  </div>
-                                  <div className="col-sm-3 input-field">
-                                    <Field
+                                  />
+                                </div>
+                                <div className="col-sm-3 input-field">
+                                  <Field
                                     type="string"
                                     name={`crisis[${idx}].assistance`}
                                   />
@@ -109,7 +116,7 @@ export default function Family() {
                                       <Field
                                         type="number"
                                         name={`crisis[${idx}].funding_used`}
-                                        onChange={e =>
+                                        onChange={(e) =>
                                           numberChange(
                                             e,
                                             setFieldValue,
@@ -117,21 +124,21 @@ export default function Family() {
                                           )
                                         }
                                         value={service.funding_used}
-                                        />
-                                      </div>
-                                      <div className="col-sm-2 input-field">
-                                        <Field
-                                          type="text"
-                                          name={`crisis[${idx}].notes`}
-                                          />
-                                          </div>
-                                        </>
-                                      ) : null}
+                                      />
                                     </div>
-                                  ))
-                                : null}
+                                    <div className="col-sm-2 input-field">
+                                      <Field
+                                        type="text"
+                                        name={`crisis[${idx}].notes`}
+                                      />
+                                    </div>
+                                  </>
+                                ) : null}
+                              </div>
+                            ))
+                          : null}
 
-<div className="input-container row patient-row">
+                        <div className="input-container row patient-row">
                           <label className="col-sm-4">
                             Total # of unduplicated patients served:
                           </label>
@@ -140,4 +147,64 @@ export default function Family() {
                             className="col-sm-8"
                             name="no_of_unduplicated"
                           />
-                         
+                        </div>
+                        <div className="input-container row patient-row">
+                          <label className="col-sm-4">
+                            Additional Services Provided :
+                          </label>
+                          <Field
+                            type="text"
+                            className="col-sm-8"
+                            name="additional_services"
+                          />
+                        </div>
+                        <div className="input-container row patient-row">
+                          <label className="col-sm-4">
+                            Please briefly share a patient story of a patient
+                            served by this program. :
+                          </label>
+                          <Field
+                            type="text"
+                            className="col-sm-8"
+                            name="story_patient"
+                          />
+                        </div>
+                        <div className="input-container row patient-row">
+                          <label className="col-sm-4">
+                            Can this patient be contacted to further share their
+                            story? :
+                          </label>
+                          <Field
+                            type="checkbox"
+                            className="col-sm-8"
+                            name="patient_contact"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  ></FieldArray>
+                  {submitting === true ? (
+                    <div className="submit-status">Updating...</div>
+                  ) : submitting === false ? (
+                    <div className="submit-status success">
+                      Successfully updated the program
+                    </div>
+                  ) : null}
+                  <div className="actions-container MT30">
+                    <button
+                      onClick={() => {
+                        onSubmit(values);
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          )}
+        </Formik>
+      </div>
+    </div>
+  );
+}
