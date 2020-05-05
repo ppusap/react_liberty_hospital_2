@@ -6,7 +6,7 @@ export default function Siblings({ siblings, setFieldValue, deleteSibling }) {
   return (
     <div className="sibling-container">
       <div className="row">
-        <div className="col-sm-4 th">Sibling Names</div>
+        <div className="col-sm4 th">Sibling Names</div>
         <div className="col-sm-1 th">Attending College?</div>
         <div className="col-sm-4 th">Where?</div>
         <div className="col-sm-2 th">Year in School</div>
